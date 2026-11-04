@@ -1,6 +1,7 @@
 -- COMANDOS DDL - DATA DEFINITION LANGUAGE
 
 -- COMANDOS TERMINAL PSQL
+-- \l            : listar databases
 -- \c <DATABASE> : entrar em determinado database
 -- \d <TABELA>   : listar atributos de determinada tabela
 -- \dt           : listar tabelas de determinado database
@@ -33,9 +34,9 @@ salario DECIMAL(10,2),
 sexo VARCHAR(1),
 supident TIPO_ID,
 dnumero TIPO_ID NOT NULL,
-PRIMARY KEY (ident),
-FOREIGN KEY (supident) REFERENCES FUNCIONARIO (ident),
-FOREIGN KEY (dnumero) REFERENCES DEPARTAMENTO (numero)
+PRIMARY KEY (ident)
+-- FOREIGN KEY (supident) REFERENCES FUNCIONARIO (ident),
+-- FOREIGN KEY (dnumero) REFERENCES DEPARTAMENTO (numero)
 );
 
 CREATE TABLE dependente
@@ -83,9 +84,22 @@ PRIMARY KEY (pnumero, fident)
 
 -- \d FUNCIONARIO : listar atributos tabela FUNCIONARIO
 
-ALTER TABLE FUNCIONARIO DROP sexo;
-ALTER TABLE FUNCIONARIO ADD sexo VARCHAR(1);
+-- ALTER TABLE FUNCIONARIO DROP sexo;
+-- ALTER TABLE FUNCIONARIO ADD sexo VARCHAR(1);
 
 -- Comandos DML - DATA MANIPULATION LANGUAGE
-INSERT INTO DEPARTAMENTO VALUES(1, 'TI', NULL, NULL);
-SELECT * FROM DEPARTAMENTO;
+-- INSERT INTO DEPARTAMENTO VALUES(1, 'TI', NULL, NULL);
+-- SELECT * FROM DEPARTAMENTO;
+
+ALTER TABLE funcionario
+ADD CONSTRAINT fk_funcionario_departamento 
+                 FOREIGN KEY (funcionario) 
+                 REFERENCES departamento (dnumero);
+
+ALTER TABLE funcionario
+ADD CONSTRAINT fk_funcionario_departamento 
+                 FOREIGN KEY (supident) 
+                 REFERENCES funcionario (ident);
+
+ALTER TABLE funcionario
+ALTER supident SET DEFAULT 5;
