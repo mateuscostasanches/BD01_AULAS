@@ -16,13 +16,6 @@ CREATE DATABASE bi3032558_ifsp;
 -- (FEITO) 4. Defina as restrições CHECK que garantem cargas horárias maiores que zero em CURSO e DISCIPLINA.
 -- (FEITO) 5. Atribua nomes às restrições, por exemplo: pk_curso, fk_aluno_curso, uq_aluno_matricula e ck_disciplina_carga_horaria.
 
-CREATE TABLE curso
-(
-    id_curso INTEGER,
-    nome VARCHAR(100) NOT NULL,
-    carga_horaria INTEGER NOT NULL CHECK (carga_horaria > 0),
-    PRIMARY KEY (id_curso)
-);
 
 CREATE TABLE aluno
 (
