@@ -3,6 +3,8 @@
 -- EXERCICIO PROPOSTO - DQL
 -- PARTE B - CONSULTA
 
+---------------------------------------------------------------------------------------------------------
+
 -- 6. Liste todos os dados da tabela curso.
 SELECT * 
 FROM curso;
@@ -14,6 +16,7 @@ FROM curso;
 --         4 | Gestão da Tecnologia da Informação    |          2000 | Presencial
 -- (4 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 7. Exiba apenas o nome e a matrícula de todos os alunos.
 SELECT nome,matricula 
@@ -32,6 +35,7 @@ FROM aluno;
 --  João Pereira     | 2026010
 -- (10 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 8. Liste os alunos em ordem alfabética pelo nome.
 SELECT * FROM aluno 
@@ -50,6 +54,7 @@ ORDER BY nome ASC;
 --        10 | João Pereira     | 2026010   |                 |        3 |
 -- (10 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 9. Liste as disciplinas em ordem decrescente de carga horária. Em caso de empate, ordene pelo nome em ordem crescente.
 SELECT * FROM disciplina 
@@ -67,6 +72,7 @@ ORDER BY carga_horaria DESC, nome ASC;
 --              9 | Sistemas Operacionais       |            60 |        3 |
 -- (9 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 10. Liste os alunos vinculados ao curso de código 1.
 SELECT * FROM aluno 
@@ -79,6 +85,7 @@ WHERE id_curso=1;
 --         9 | Isabela Oliveira | 2026009   | 2005-12-01      |        1 |
 -- (4 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 11. Liste as disciplinas com carga horária maior ou igual a 80.
 SELECT * FROM disciplina
@@ -91,6 +98,7 @@ SELECT * FROM disciplina
 --              7 | Redes de Computadores I |            80 |        3 |
 -- (4 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 12. Liste os alunos com data de nascimento anterior a 2005-01-01.
 SELECT * FROM aluno 
@@ -102,6 +110,8 @@ WHERE data_nascimento < '2005-01-01';
 --         6 | Felipe Alves | 2026006   | 2004-04-30      |        3 |
 -- (3 linhas)
 
+---------------------------------------------------------------------------------------------------------
+
 -- 13. Liste os alunos cujo nome começa com a letra A, utilizando LIKE.
 SELECT * FROM aluno 
 WHERE nome LIKE 'A%';
@@ -110,6 +120,7 @@ WHERE nome LIKE 'A%';
 --         1 | Ana Souza | 2026001   | 2005-03-15      |        1 |
 -- (1 linha)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 14. Liste os alunos sem data de nascimento cadastrada.
 SELECT * FROM aluno 
@@ -120,6 +131,7 @@ WHERE data_nascimento IS NULL;
 --        10 | João Pereira     | 2026010   |                 |        3 |
 -- (2 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 15. Liste os alunos dos cursos 1 e 3, utilizando IN.
 SELECT * FROM aluno 
@@ -135,6 +147,7 @@ WHERE id_curso IN (1, 3);
 --        10 | João Pereira     | 2026010   |                 |        3 |
 -- (7 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 16. Liste as disciplinas com carga horária entre 60 e 80, inclusive, utilizando BETWEEN.
 SELECT * FROM disciplina 
@@ -152,6 +165,7 @@ WHERE carga_horaria BETWEEN 60 AND 80;
 --              9 | Sistemas Operacionais       |            60 |        3 |
 -- (9 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 17. Exiba o nome de cada aluno e o nome do seu curso.
 SELECT a.nome AS nome_aluno, c.nome AS nome_curso 
@@ -170,6 +184,7 @@ FROM aluno a JOIN curso c ON a.id_curso = c.id_curso;
 --  Elisa Rocha      | Redes de Computadores
 -- (10 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 18. Exiba o nome de cada disciplina, sua carga horária e o nome do curso ao qual pertence.
 SELECT d.nome AS nome_disciplina, d.carga_horaria AS carga_horaria_disciplina, c.nome AS nome_curso 
@@ -187,6 +202,8 @@ FROM disciplina d JOIN curso c ON d.id_curso = c.id_curso;
 --  Redes de Computadores I     |                       80 | Redes de Computadores
 -- (9 linhas)
 
+---------------------------------------------------------------------------------------------------------
+
 -- 19. Liste o nome e a matrícula dos alunos do curso “Engenharia de Computação”. Faça o filtro pelo nome do curso, utilizando o relacionamento entre as tabelas
 SELECT a.nome AS nome_aluno, a.matricula AS matricula_aluno 
 FROM aluno a JOIN curso c ON a.id_curso = c.id_curso 
@@ -199,6 +216,7 @@ AND c.nome='Engenharia de Computação';
 --  Isabela Oliveira | 2026009
 -- (4 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 20. Exiba a quantidade total de alunos cadastrados.
 SELECT COUNT(*) 
@@ -208,6 +226,7 @@ FROM aluno;
 --     10
 -- (1 linha)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 21. Exiba a maior e a menor carga horária entre as disciplinas.
 SELECT MIN(carga_horaria) AS menor_carga_horaria, MAX(carga_horaria) AS maior_carga_horaria 
@@ -217,6 +236,7 @@ FROM disciplina;
 --                   60 |                  80
 -- (1 linha)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 22. Exiba a média das cargas horárias das disciplinas.
 SELECT AVG(carga_horaria) 
@@ -226,6 +246,7 @@ FROM disciplina;
 --  68.8888888888888889
 -- (1 linha)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 23. Exiba o nome de cada curso e sua quantidade de alunos. Inclua também os cursos sem alunos, apresentando quantidade igual a zero.
 SELECT c.nome AS nome_curso, COUNT(a.id_aluno) AS quantidade_alunos 
@@ -239,6 +260,7 @@ GROUP BY c.id_curso, c.nome;
 --  Redes de Computadores                 |                 3
 -- (4 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 24. Exiba o nome de cada curso e a soma das cargas horárias de suas disciplinas. Inclua os cursos sem disciplinas, apresentando soma igual a zero.
 SELECT c.nome AS nome_curso, SUM(d.carga_horaria) AS soma_cargas_horarias_disciplinas 
@@ -252,6 +274,7 @@ GROUP BY c.id_curso, c.nome;
 --  Redes de Computadores                 |                              200
 -- (4 linhas)
 
+---------------------------------------------------------------------------------------------------------
 
 -- 25. Liste apenas os cursos com pelo menos três alunos, exibindo o nome do curso e a quantidade de alunos
 SELECT c.nome AS nome_curso, COUNT(a.id_aluno) AS quantidade_alunos 
@@ -264,3 +287,5 @@ HAVING COUNT(a.id_aluno) >= 3;
 --  Análise e Desenvolvimento de Sistemas |                 3
 --  Engenharia de Computação              |                 4
 -- (3 linhas)
+
+---------------------------------------------------------------------------------------------------------
